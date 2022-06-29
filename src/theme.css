@@ -1,0 +1,13 @@
+* {
+    background-color: white;
+}
+
+:root
+{
+    --text-size-medium: 14px;
+}
+
+.body
+{
+    font-size: var(--text-size-medium);
+}
