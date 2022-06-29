@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Artist from "./Artist";
 import Search from "./Search";
 import Login from "./Login";
+import Tracks from "./Tracks";
 
 const BASE_SPOTIFY_ADDRESS = "https://api.spotify.com/v1";
 
@@ -46,7 +47,7 @@ class App extends React.Component {
           const artist = data.artists.items[0];
           this.setState({ artist });
           fetch(
-            `${BASE_SPOTIFY_ADDRESS}/artists/${this.state.artist.id}/top-tracks?country=US`,
+            `${BASE_SPOTIFY_ADDRESS}/artists/${artist.id}/top-tracks?country=US`,
             requestOptions
           )
             .then((response) => response.json())
@@ -61,10 +62,12 @@ class App extends React.Component {
     console.log(this.state);
     return (
       <div>
-        <h1>Music</h1>
+        <h1>Music App</h1>
         {!this.state.token ? (<Login />) : (<button onClick={this.logout}>Logout</button>)}
+        <hr/>
         {this.state.token ? (<Search searchArtist={this.searchArtist} />) : (<h2>Please login</h2>)}
         <Artist artist={this.state.artist} />
+        <Tracks tracks={this.state.tracks} />    
       </div>
     );
   }
